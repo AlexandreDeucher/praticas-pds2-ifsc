@@ -2,7 +2,7 @@ package modelo;
 
 public class Pessoa {
 	private String nome;
-	private long cpf;
+	private int cpf;
 	
 	public String getNome() {
 		return nome;
@@ -10,10 +10,10 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public long getCpf() {
+	public int getCpf() {
 		return cpf;
 	}
-	public void setCpf(long cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 }
