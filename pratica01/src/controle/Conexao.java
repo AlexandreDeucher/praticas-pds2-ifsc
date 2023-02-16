@@ -1,6 +1,6 @@
 package controle;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -8,8 +8,8 @@ public class Conexao {
 	
 	private static Connection conexao;
 	private static Conexao instancia;
-	private static final String DATABASE = "hr";
-	private static final String USER = "aluno";
+	private static final String DATABASE = "alexandre";
+	private static final String USER = "root";
 	private static final String PSW = "aluno";
 	
 	
@@ -17,7 +17,7 @@ public class Conexao {
 		
 	}
 	
-	public Conexao getInstancia() {
+	public static Conexao getInstancia() {
 		if(instancia == null) {
 			instancia = new Conexao();
 		}
