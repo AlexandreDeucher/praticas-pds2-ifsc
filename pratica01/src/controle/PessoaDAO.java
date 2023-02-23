@@ -26,7 +26,7 @@ public class PessoaDAO {
 			stm.setString(2, "alexandre");
 			
 			int valida = stm.executeUpdate();
-			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -36,15 +36,34 @@ public class PessoaDAO {
 	}
 	//update
 	public boolean atualizar(Pessoa p) {
-		
+		Connection con = Conexao.getInstancia().conectar();
+		try {
+			String query = "UPDATE pessoa SET nome = ? WHERE cpf = ?";
+			PreparedStatement stm = con.prepareStatement(query);
+			stm.setString(1, p.getNome());
+			stm.setInt(2, p.getCpf());
+			stm.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		
 		return false;
 	}
 	//delete
 		public boolean deletar(Pessoa p) {
-			
-			
+			Connection con = Conexao.conectar();
+			try {
+				String query = "DELETE FROM pessoa WHERE cpf = ?";
+				PreparedStatement stm = con.prepareStatement(query);
+				stm.setInt(1, p.getCpf());
+				stm.executeUpdate();
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Conexao.fecharConnection();
 			
 			return false;
 	}		
