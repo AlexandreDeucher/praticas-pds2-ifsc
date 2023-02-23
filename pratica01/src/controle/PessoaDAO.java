@@ -49,7 +49,7 @@ public class PessoaDAO {
 			return false;
 	}		
 	//listar
-		public ArrayList<Pessoa> listarPessoas(){
+		public ArrayList<Pessoa> listarPessoas(Pessoa p){
 			ArrayList<Pessoa> pessoas = new ArrayList<>();
 			
 			con = Conexao.getInstancia();
