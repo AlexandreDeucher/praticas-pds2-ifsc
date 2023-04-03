@@ -5,10 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import ex1.Ex1;
 
@@ -18,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Ex2 extends JFrame {
 
@@ -55,19 +59,18 @@ public class Ex2 extends JFrame {
 		contentPane.setLayout(null);
 		
 		txtMatricula = new JTextField();
-		txtMatricula.setBounds(155, 41, 86, 20);
+		txtMatricula.setBounds(76, 41, 86, 20);
 		contentPane.add(txtMatricula);
 		txtMatricula.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Matricula:");
-		lblNewLabel.setBounds(99, 44, 56, 14);
+		lblNewLabel.setBounds(10, 44, 56, 14);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnInsert = new JButton("New button");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Ex2 ex2 = new Ex2();
-				
 				String matricula=txtMatricula.getText();
 				if(matricula == null || matricula.isEmpty()) {
 					JOptionPane.showMessageDialog(null,"campo matricula vazio");
@@ -86,28 +89,47 @@ public class Ex2 extends JFrame {
 				}else {
 					ex2.setEmail(email);
 				}
+				
 			}
 		});
-		btnInsert.setBounds(152, 141, 89, 23);
+		btnInsert.setBounds(30, 138, 89, 23);
 		contentPane.add(btnInsert);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(155, 72, 86, 20);
+		txtNome.setBounds(76, 72, 86, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(155, 103, 86, 20);
+		txtEmail.setBounds(76, 103, 86, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nome:");
-		lblNewLabel_1.setBounds(99, 75, 46, 14);
+		lblNewLabel_1.setBounds(10, 69, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("E-mail:");
-		lblNewLabel_2.setBounds(99, 106, 46, 14);
+		lblNewLabel_2.setBounds(10, 106, 46, 14);
 		contentPane.add(lblNewLabel_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(172, 41, 252, 209);
+		contentPane.add(scrollPane);
+		
+		ArrayList<Ex2> lista = new ArrayList<>();
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		DefaultTableModel modelo = new DefaultTableModel(new Object[][] {},
+				new String[] { "matricula", "nome", "email"});
+		
+		if(lista.size() > 0 && lista != null) {
+			for (Ex2 ex2 : lista) {
+				modelo.addRow(new Object [] {ex2.getMatricula(), ex2.getNome(), ex2.getEmail()});
+			}
+		}
+		table.setModel(modelo);
 	}
 	private static Connection conexao;
 	private static Ex1 instancia;
@@ -119,6 +141,8 @@ public class Ex2 extends JFrame {
 	private String matricula;
 	private String nome;
 	private String email;
+	private JTable table;
+	
 	public String getMatricula() {
 		return matricula;
 	}
